@@ -4,7 +4,6 @@ const path = require("path");
 const dotenv = require('dotenv');
 dotenv.config();
 const router = require("./app/routes.js");
-
 app.use(express.urlencoded({extended: false}));
 
 // Définir dans notre application le moteur de template utilisé

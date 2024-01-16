@@ -6,18 +6,20 @@ block content
         .row.justify-content-center
             .col-md-6
                 h1 Inscription
+                if error
+                    .alert.alert-danger #{error}
                 form(action="/inscription" method="post")
                     .form-group
                         label(for='nom') Nom :
-                        input.form-control(type='text', name="lastname" id='nom', placeholder='Votre nom')
+                        input.form-control(type='text', name="lastname" id='nom', value=user.lastname ,placeholder='Votre nom')
 
                     .form-group
                         label(for='prenom') Prénom :
-                        input.form-control(type='text', name="firstname", id='prenom', placeholder='Votre prénom')
+                        input.form-control(type='text', name="firstname", id='prenom', value=user.firstname ,placeholder='Votre prénom')
 
                     .form-group
                         label(for='email') Email :
-                        input.form-control(type='email', name="email", id='email', placeholder='Votre email')
+                        input.form-control(type='email', name="email", id='email', value=user.email ,placeholder='Votre email')
 
                     .form-group
                         label(for='password') Mot de passe :

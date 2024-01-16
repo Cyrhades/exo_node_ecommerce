@@ -3,3 +3,5 @@ db.createUser({
     pwd: "example",
     roles: [{role: "readWrite", db: "boutik" }]
 });
+
+db.users.createIndex({email:1}, {unique:true})
