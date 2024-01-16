@@ -1,0 +1,16 @@
+background prenav: #00234D 
+color + a color prenav: #FFFFFF;
+
+
+background : #FFFBE5
+
+link actived : #F76B6A
+
+bloc 1: #F3F3FF       |   bloc 3: #FAF2ED
+bloc 2: #EAF3E0       |
+
+
+bloc n: #F7F7F7
+
+
+footer: #FBF3F0 

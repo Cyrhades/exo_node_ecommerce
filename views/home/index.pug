@@ -1,0 +1,77 @@
+extends ../layout.pug
+block content
+    .container-fluid#catchWords
+        .align-items-center.justify-content-center.d-flex
+            img(src="/images/phrase.png" alt="phrase d'accroche" height="140")
+
+    .container
+        .trusted-section.mt-50.overflow-hidden.d-lg-block.d-none
+            .container
+                .row.justify-content-center
+                    .col-lg-4.col-md-6.col-12
+                        .trusted-badge
+                            .trusted-icon
+                                img.icon-trusted(src="/images/trust_1.png" alt="icon-1")
+                            .trusted-content
+                                h2.heading_18.trusted-heading Livraison gratuite
+                                p.text_14.trusted-subheading.trusted-subheading-2 Pour toute commande supérieure à 1.999,00€
+
+                    .col-lg-4.col-md-6.col-12
+                        .trusted-badge
+                            .trusted-icon
+                                img.icon-trusted(src="/images/trust_2.png" alt="icon-2")
+                            .trusted-content
+                                h2.heading_18.trusted-heading Service client
+                                p.text_14.trusted-subheading.trusted-subheading-2 8/7j et 25/24h, le meilleur service client.
+
+                    .col-lg-4.col-md-6.col-12
+                        .trusted-badge
+                            .trusted-icon
+                                img.icon-trusted(src="/images/trust_3.png" alt="icon-3")
+                            .trusted-content
+                                h2.heading_18.trusted-heading Paiement sécurisé
+                                p.text_14.trusted-subheading.trusted-subheading-2 Votre argent arrivera jusqu'à nous!
+
+                            
+
+
+    #best-selection.container
+        .container.mt-50
+            h1 Nos meilleures ventes
+        .grid-container.mt-20
+            .left-blocks
+                .block.block-1
+                    a.grid-item.grid-item-1(href="javascript:;")
+                        .height-inherit.d-flex.flex-row                            
+                            .content-absolute.content-slide
+                                .container.height-inherit.d-flex
+                                    .content-box.banner-content.p-4
+                                        h2.heading_34 Cadenas Magnum
+                                        p.text_14.mt-2.primary-color Vendu sans clé
+                                        span.text_12.mt-4.link-underline En savoir plus
+                            img(src="/images/products/cadenas.png" height="140px" alt="banner-1")
+                .block.block-2
+                    a.grid-item.grid-item-1(href="javascript:;")
+                        .height-inherit.d-flex.flex-row
+                            img(src="/images/products/bouteille.png" height="140px" alt="banner-1")
+                            .content-absolute.content-slide
+                                .container.height-inherit.d-flex
+                                    .content-box.banner-content.p-4
+                                        h2.heading_34 Bouteille vide
+                                        p.text_14.mt-2.primary-color Bouteille pleine de vide
+                                        span.text_12.mt-4.link-underline En savoir plus
+            .right-block
+                .block.block-3
+                    a.grid-item.grid-item-1(href="javascript:;")
+                        .height-inherit.d-flex.flex-row                            
+                            .content-absolute.content-slide
+                                .container.height-inherit.d-flex
+                                    .content-box.banner-content.p-4
+                                        h2.heading_34 Tout savoir sur les cailloux
+                                        p.text_14.mt-2.primary-color Reproduction des caillous en milieu naturel
+                                        span.text_12.mt-4.link-underline En savoir plus
+                            img(src="/images/products/livre.png" height="360px" alt="banner-1")
+                
+
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js", integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL", crossorigin="anonymous")
+    script(src=process.env.BROWSER_REFRESH_URL)

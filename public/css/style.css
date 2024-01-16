@@ -1,0 +1,86 @@
+.mt-20 { margin-top:20px; }
+.mt-50 { margin-top:50px; }
+.mt-100 { margin-top:100px; }
+#prenav {
+    background-color: #00234D;
+    color:#FFFFFF;
+    font-size: 14px;
+    line-height: 27px;
+    font-weight: var(--body-font-weight);
+    padding-top:5px;
+    padding-bottom:5px;
+}
+#prenav a {
+    color:#FFFFFF;
+    text-decoration:none;
+}
+
+a.navbar-brand img { margin-right: 15px;}
+
+.nav-link.active, .nav-text-sub:hover {
+    color: #F76B6A!important;
+}
+
+.nav-link, .nav-link:hover, .nav-text-sub:hover {
+    color: #000; 
+}
+
+
+#catchWords { background-color: #FFFBE5; padding:30px; }
+
+.trusted-heading { color: #00234D; }
+.heading_18 { 
+    font-size: 18px; 
+    line-height: 1.5; 
+    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"; 
+}
+.trusted-badge { margin-top:40px; display: flex; align-items: center; }
+.trusted-icon { margin-right: 15px; }
+.icon-trusted { max-width: 100%; }
+.trusted-content { flex-grow: 1; }
+.text_14 { font-size: 14px; }
+.trusted-heading, .trusted-subheading, .trusted-subheading-2 { margin: 0; }
+
+#best-selection .grid-container {
+    position:relative;
+    height: 300px;    
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+ }
+ .left-blocks {
+    grid-column: 1/2;
+    grid-row: 1/2;
+ }
+ .right-block {
+    grid-column: 2/2;
+ }
+.block { padding: 20px;  margin-bottom: 10px;}
+
+#best-selection, #best-selection a {
+    color: #00234D;
+    text-decoration:none;
+}
+#best-selection span.link-underline {
+    color: #00234D;
+    text-decoration:underline;
+}
+
+.block-1 { background-color: #F3F3FF; }
+.block-2 { background-color: #EAF3E0; }
+.block-3 { background-color: #FAF2ED; }
+
+footer {
+    margin-top:200px;
+    background-color: #FBF3F0;
+}
+
+
+
+/* Barre de défilement */
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-thumb {
+    background-color: #00234D;
+    border-radius: 6px;
+}
+::-webkit-scrollbar-track { background-color: #f1f1f1; }
