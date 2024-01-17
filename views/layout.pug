@@ -23,11 +23,11 @@ html(lang="en")
                             </svg>
         nav.navbar.bg-body-tertiary
             .container
-                a.navbar-brand(href="#")
+                a.navbar-brand(href="/")
                     img(src="/images/simplelogo.png" alt="Logo" height="40")
                 ul.nav.nav-underline
                     li.nav-item
-                        a.nav-link(aria-current="page" href="#" class=(app.route=="/"?"active":"")) Accueil
+                        a.nav-link(aria-current="page" href="/" class=(app.route=="/"?"active":"")) Accueil
                     if app.user
                         li.nav-item
                             a.nav-link(href="/deconnexion") déconnexion
