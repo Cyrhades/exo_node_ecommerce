@@ -50,7 +50,7 @@ app.use((request, response, next) => {
 //--------------------------------------------------------------------
 //      Ajout du midlleware pour gérer les données en post
 //--------------------------------------------------------------------
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: process.env.ENABLE_INJECTION_MONGO == 1 ? true : false}));
 
 // Définir dans notre application le moteur de template utilisé
 app.set('view engine', 'pug');

@@ -23,15 +23,26 @@ exports.postAuth = async (request, response) => {
         response.redirect('/')
         return;
     }
-    let currentUser = await User.findOne({email: request.body.email}).exec()    
-    if(bcrypt.compareSync(request.body.password, currentUser.password)) {
+    let currentUser = null;
+    if(process.env.ENABLE_INJECTION_MONGO == 1) {
+        let getUser = await User.findOne({email: request.body.email}).exec();
+        // Si le mot de passe est incorrect on supprime les infos de current User
+        if(bcrypt.compareSync(request.body.password, getUser.password)) {
+            currentUser = getUser;
+        } 
+    }
+    else {
+        currentUser = await User.findOne({email: request.body.email, password: request.body.password}).exec();
+    }    
+
+    if(currentUser) {
         request.session.user = {
             lastname:  currentUser.lastname,
             firstname: currentUser.firstname,
             email: currentUser.email,
         };
         request.flash('notify', 'Vous êtes maintenant connecté !')
-        response.redirect('/')
+        response.redirect('/');
     } else {
         response.render('user_auth', {error: "Erreur d'identification", user:{email: request.body.email}});
     }

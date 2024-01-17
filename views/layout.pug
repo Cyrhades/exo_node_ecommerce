@@ -25,6 +25,8 @@ html(lang="en")
             .container
                 a.navbar-brand(href="/")
                     img(src="/images/simplelogo.png" alt="Logo" height="40")
+                if app.user
+                    span Bienvenue #{app.user.firstname} #{app.user.lastname}
                 ul.nav.nav-underline
                     li.nav-item
                         a.nav-link(aria-current="page" href="/" class=(app.route=="/"?"active":"")) Accueil
@@ -42,7 +44,6 @@ html(lang="en")
                                 <path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z" fill="black"></path>
                             </svg>
         
-    
         - var messages = getMessages()
 
         if messages.info || messages.notify || messages.error

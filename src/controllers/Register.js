@@ -20,7 +20,11 @@ exports.postRegister = (request, response) => {
     newUser.lastname = request.body.lastname;
     newUser.firstname = request.body.firstname;
     newUser.email = request.body.email;
-    newUser.password = bcrypt.hashSync(request.body.password, bcrypt.genSaltSync(10));
+    if(process.env.ENABLE_INJECTION_MONGO == 1) {
+        newUser.password = bcrypt.hashSync(request.body.password, bcrypt.genSaltSync(10));
+    } else {
+        newUser.password = request.body.password;
+    }
     
     newUser.save().then(() => {
         request.flash('notify', 'Votre compte a bien été enregistré!')
