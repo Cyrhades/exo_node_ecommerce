@@ -42,7 +42,7 @@ if(process.env.APP_ENV === 'dev') {
 app.use((request, response, next) => {
     response.locals.app = {
         user :  request.session.user,
-        route : '/'
+        route : request._parsedUrl.pathname
     };
     next();
 })

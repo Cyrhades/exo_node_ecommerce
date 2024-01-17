@@ -27,15 +27,15 @@ html(lang="en")
                     img(src="/images/simplelogo.png" alt="Logo" height="40")
                 ul.nav.nav-underline
                     li.nav-item
-                        a.nav-link.active(aria-current="page" href="#") Accueil
+                        a.nav-link(aria-current="page" href="#" class=(app.route=="/"?"active":"")) Accueil
                     if app.user
                         li.nav-item
                             a.nav-link(href="/deconnexion") déconnexion
                     else
                         li.nav-item
-                            a.nav-link(href="/inscription") inscription
+                            a.nav-link(href="/inscription" class=(app.route=="/inscription"?"active":"")) inscription
                         li.nav-item
-                            a.nav-link(href="/connexion") connexion
+                            a.nav-link(href="/connexion" class=(app.route=="/connexion"?"active":"")) connexion
                     li.nav-item.d-lg-none.d-md-block.d-sm-block.d-flex.align-items-bottom
                         a(href="javascript:;") 
                             <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
