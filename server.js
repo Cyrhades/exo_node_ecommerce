@@ -4,6 +4,52 @@ const path = require("path");
 const dotenv = require('dotenv');
 dotenv.config();
 const router = require("./app/routes.js");
+const session = require('express-session');
+const flash = require('express-flash-messages');
+
+
+//--------------------------------------------------------------------
+//      Ajout du midlleware express session
+//--------------------------------------------------------------------
+app.use(session({
+    secret: process.env.APP_KEY, resave:false, saveUninitialized:false, 
+    cookie: {maxAge: 3600000} 
+}));
+
+
+//--------------------------------------------------------------------
+//      Ajout du midlleware pour les flashbag
+//--------------------------------------------------------------------
+app.use(flash())
+
+//--------------------------------------------------------------------
+//    Session pour développement
+//--------------------------------------------------------------------
+if(process.env.APP_ENV === 'dev') {
+    app.use((request, response, next) => {
+        request.session.user = {
+            lastname:  'LECOMTE',
+            firstname: 'Cyril',
+            email: 'cyrhades76@gmail.com',
+        };
+        next();
+    })
+}
+
+//--------------------------------------------------------------------
+//    Ajout du midlleware pour transmettre la session à la vue
+//--------------------------------------------------------------------
+app.use((request, response, next) => {
+    response.locals.app = {
+        user :  request.session.user,
+        route : '/'
+    };
+    next();
+})
+
+//--------------------------------------------------------------------
+//      Ajout du midlleware pour gérer les données en post
+//--------------------------------------------------------------------
 app.use(express.urlencoded({extended: false}));
 
 // Définir dans notre application le moteur de template utilisé

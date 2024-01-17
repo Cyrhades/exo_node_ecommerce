@@ -1,20 +1,30 @@
 const User = require('../repositories/User.js');
+const bcrypt = require('bcryptjs');
 
 exports.getRegister = (request, response) => {
+    if(request.session.user) {
+        request.flash('info', 'Vous êtes déjà connecté !')
+        response.redirect('/')
+        return;
+    }
     response.render('user_register', {user:{}});
 }
 
 exports.postRegister = (request, response) => {
+    if(request.session.user) {
+        request.flash('info', 'Vous êtes déjà connecté !')
+        response.redirect('/')
+        return;
+    }
     const newUser = new User();
     newUser.lastname = request.body.lastname;
     newUser.firstname = request.body.firstname;
     newUser.email = request.body.email;
-    newUser.password = request.body.password;
+    newUser.password = bcrypt.hashSync(request.body.password, bcrypt.genSaltSync(10));
     
     newUser.save().then(() => {
-        response.send("ok");
-        // @todo : redirection
-
+        request.flash('notify', 'Votre compte a bien été enregistré!')
+        response.redirect('/')
     }).catch((error) => {
         if(error.code == 11000 && error.keyPattern.email) {
             response.render('user_register', {
