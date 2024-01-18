@@ -81,9 +81,14 @@ router(app)
 //--------------------------------------------------------------------
 //  Middleware permettant de gérer la 404
 //--------------------------------------------------------------------
-app.use((request, response, next) => {
+app.use('/admin',(request, response, next) => {
     response.status(404).render("admin/error/404");            
 })
+
+app.use((request, response, next) => {
+    response.status(404).render("error/404");            
+})
+
 
 // Mise en écoute du serveur
 app.listen(process.env.PORT, () => {
