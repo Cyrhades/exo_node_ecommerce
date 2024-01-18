@@ -40,6 +40,7 @@ exports.postAuth = async (request, response) => {
             lastname:  currentUser.lastname,
             firstname: currentUser.firstname,
             email: currentUser.email,
+            roles: currentUser.roles
         };
         request.flash('notify', 'Vous êtes maintenant connecté !')
         response.redirect('/');

@@ -1,21 +1,12 @@
 const User = require('../repositories/User.js');
 
 exports.getList = (request, response) => {
-    if(!request.session.user) {
-        response.redirect('/connexion')
-        return;
-    }
-
     User.find({}).then(users => {
         response.render('admin/user', {users});
     })
 }
 
 exports.getDelete =  (request, response) => {
-    if(!request.session.user) {
-        response.redirect('/connexion')
-        return;
-    }
     if(request.params.id) {
         User.deleteOne({_id: request.params.id}).then((result) => {
             if(result.deletedCount == 1) {
@@ -34,11 +25,6 @@ exports.getDelete =  (request, response) => {
 
 
 exports.getEdit = (request, response) => {
-    if(!request.session.user) {
-        response.redirect('/connexion')
-        return;
-    }
-
     if(request.params.id) {
         User.findById(request.params.id).then((user) => {
             response.render('admin/user/edit', {user});
@@ -49,11 +35,6 @@ exports.getEdit = (request, response) => {
 }
 
 exports.postEdit = (request, response) => {
-    if(!request.session.user) {
-        response.redirect('/connexion')
-        return;
-    }
-
     if(request.params.id) {
         const data = {
             lastname : request.body.lastname,

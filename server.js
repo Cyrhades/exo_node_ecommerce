@@ -31,6 +31,7 @@ if(process.env.APP_ENV === 'dev') {
             lastname:  'LECOMTE',
             firstname: 'Cyril',
             email: 'cyrhades76@gmail.com',
+            roles: ['user', 'admin']
         };
         next();
     })
@@ -58,7 +59,31 @@ app.set('view engine', 'pug');
 // On déclare dans notre application quel sera notre répertoire static
 app.use(express.static(path.join(__dirname, "public")));
 
+
+//--------------------------------------------------------------------
+//  Middleware permettant de gérer les droits admin
+//--------------------------------------------------------------------
+app.use('/admin',(request, response, next) => {
+    if(request.session && request.session.user) {
+        if(request.session.user.roles && request.session.user.roles.includes('admin')) {
+            next();
+        } else {
+            response.status(403).render("admin/error/403");
+        }
+    }
+    else {
+        response.redirect('/connexion')
+    }        
+})
+
 router(app)
+
+//--------------------------------------------------------------------
+//  Middleware permettant de gérer la 404
+//--------------------------------------------------------------------
+app.use((request, response, next) => {
+    response.status(404).render("admin/error/404");            
+})
 
 // Mise en écoute du serveur
 app.listen(process.env.PORT, () => {

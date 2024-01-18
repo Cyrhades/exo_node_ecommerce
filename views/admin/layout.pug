@@ -20,7 +20,8 @@ html
           li.nav-item.dropdown
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="https://avatars.githubusercontent.com/u/2495327?s=460&u=6d1b3dfc5c3279f5a39f45bf014bf4b1c29b18f3&v=4" alt="mdo" width="32" height="32" class="rounded-circle me-2">
-              <strong>#{app.user.firstname} #{app.user.lastname}</strong>
+              if app.user
+                <strong>#{app.user.firstname} #{app.user.lastname}</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" style="position:absolute;" aria-labelledby="dropdownUser1">
               <li><a class="dropdown-item" href="/config">Configuration</a></li>

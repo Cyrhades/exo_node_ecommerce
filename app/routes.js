@@ -16,7 +16,6 @@ module.exports = (app) => {
     app.get('/deconnexion', Auth.getDeconnect)
     
 
-
     app.get('/admin', Dashboard.getDashboard)
     app.get('/admin/user', AdminUser.getList)
 
