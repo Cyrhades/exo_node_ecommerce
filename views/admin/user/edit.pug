@@ -1,0 +1,30 @@
+extends ../layout.pug
+
+block content 
+    .container.mt-5
+
+        .row.justify-content-center
+            .col-md-8
+                h1 Modification d'un utilisateur
+                if error
+                    .alert.alert-danger #{error}
+                form(action="/admin/user/edit/"+user._id method="post")
+                    .form-group
+                        label(for='nom') Nom :
+                        input.form-control(type='text', name="lastname" id='nom', value=user.lastname ,placeholder='Votre nom')
+
+                    .form-group
+                        label(for='prenom') Prénom :
+                        input.form-control(type='text', name="firstname", id='prenom', value=user.firstname ,placeholder='Votre prénom')
+
+                    .form-group
+                        label(for='email') Email :
+                        input.form-control(type='email', name="email", id='email', value=user.email ,placeholder='Votre email')
+
+                    .form-group
+                        label(for='email') Roles :
+                        select.form-control(multiple="multiple", name="roles" size="5")
+                            option(value="user", selected=user.roles.includes("user")) Utilisateur
+                            option(value="admin", selected=user.roles.includes("admin")) Administrateur
+
+                    button.btn.btn-primary.mt-20(type='submit') Modifier

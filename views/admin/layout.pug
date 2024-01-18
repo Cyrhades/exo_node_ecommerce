@@ -1,0 +1,78 @@
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title ToutA10 - Dashboard
+    
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous")
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous")
+    link(href='/css/admin.css' rel='stylesheet')
+ 
+  body
+    header(class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow")
+      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/admin">#{websiteName}</a>
+ 
+      <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      div(class="d-none d-md-block d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start")
+        ul.navbar-nav.px-3
+          li.nav-item.dropdown
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://avatars.githubusercontent.com/u/2495327?s=460&u=6d1b3dfc5c3279f5a39f45bf014bf4b1c29b18f3&v=4" alt="mdo" width="32" height="32" class="rounded-circle me-2">
+              <strong>#{app.user.firstname} #{app.user.lastname}</strong>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" style="position:absolute;" aria-labelledby="dropdownUser1">
+              <li><a class="dropdown-item" href="/config">Configuration</a></li>
+              <li><a class="dropdown-item" href="/profile">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/deconnexion">Se déconnecter</a></li>
+            </ul>
+ 
+    .container-fluid
+      .row
+        nav#sidebarMenu.col-md-3.col-lg-2.d-md-block.bg-light.sidebar.collapse
+          ul.nav.flex-column
+            li.nav-item
+              a.nav-link(class=(app.route == '/admin' ? 'active' : '' ), href='/admin')
+                  em.fa.fa-tachometer-alt &nbsp;
+                  | Dashboard
+            li.nav-item
+              a.nav-link(class=(app.route.indexOf('/admin/realty') != -1  ? 'active' : '' ), href='/admin/realty')
+                em.fa.fa-home &nbsp;
+                | Biens
+            li.nav-item
+              a.nav-link(class=(app.route.indexOf('/admin/contact') != -1 ? 'active' : '' ), href='/admin/contact')
+                em.fa.fa-address-book &nbsp;
+                | Contacts
+            li.nav-item
+              a.nav-link(class=(app.route.indexOf('/admin/user') != -1 ? 'active' : '' ), href='/admin/user')
+                em.fa.fa-user &nbsp;
+                | Collaborateurs
+            li.nav-item
+              a.nav-link(class=(app.route.indexOf('/admin/message') != -1 ? 'active' : '' ), href='/admin/message')
+                em.fa.fa-envelope &nbsp;
+                | Messages
+ 
+ 
+ 
+        main(class="col-md-9 ms-sm-auto col-lg-10 px-md-4")
+          .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+            ol.breadcrumb
+              block breadcrumb
+ 
+          .row
+            .col-md-12
+              - var messages = getMessages()
+              if messages.notify
+                each msg in messages.notify
+                  .alert.alert-info= msg
+              if messages.error
+                each msg in messages.error
+                  .alert.alert-danger= msg
+            
+            block content  
+ 
+    block scripts 
+    script(src=process.env.BROWSER_REFRESH_URL)
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous")

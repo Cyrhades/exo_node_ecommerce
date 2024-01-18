@@ -1,0 +1,26 @@
+extends ../layout.pug
+
+block content
+    h2 Liste des utilisateurs 
+
+    if users 
+        table.table 
+            thead 
+                tr 
+                    th Nom 
+                    th Email
+                    th
+            tbody
+                for user in users 
+                    tr 
+                        td #{user.firstname} #{user.lastname}
+                        td #{user.email}
+                        td 
+                            a.btn.btn-primary(href="/admin/user/edit/"+user.id) 
+                                i.fa.fa-edit
+                            
+                            a.btn.btn-danger(href="/admin/user/delete/"+user.id) 
+                                i.fa.fa-trash
+
+    else 
+        .alert.alert-info Aucun utilisateur 

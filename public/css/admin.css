@@ -1,0 +1,35 @@
+.form-group {
+    position:relative;
+}
+#listContacts {
+    z-index:10;
+    display:none;
+    list-style: none;
+    position:absolute;
+    background:#fff;
+    width:100%;
+    max-height:150px;
+    overflow:auto;
+    border: solid grey 2px;
+    border-top:none;
+}
+
+#listContacts li {
+    height:40px;
+    vertical-align:middle;
+}
+#listContacts li:hover {
+    background:#ccc;
+}
+
+
+.lcUpload__block{position:relative; text-align:center; 
+    font-size: 1.25rem;  background-color: #bbb; padding: 80px 20px;}
+.lcUpload__file{ position:absolute;top:0;left:0; height:100%;width:100%;visibility:hidden; }
+.lcUpload__input, .lcUpload__input label{ position:absolute;top:0;left:0; height:100%;width:100%;  padding-top:55px;}
+
+#lcUpoadList .onePicture{ text-align:center; padding: 10px; display:inline-block; height: 220px; width:240px; background: #ccc; border:#555; margin :20px; }
+.productImg {  width: 100%; }
+#lcUpoadList .onePicture input{
+    margin-top: 5px;
+}
