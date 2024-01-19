@@ -25,6 +25,7 @@ app.use(flash())
 //--------------------------------------------------------------------
 //    Session pour développement
 //--------------------------------------------------------------------
+
 if(process.env.APP_ENV === 'dev') {
     app.use((request, response, next) => {
         request.session.user = {

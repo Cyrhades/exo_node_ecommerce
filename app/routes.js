@@ -3,16 +3,19 @@ const Register = require('../src/controllers/Register.js');
 const Auth = require('../src/controllers/Auth.js');
 const Dashboard = require('../src/controllers/Dashboard.js');
 const AdminUser = require('../src/controllers/AdminUser.js');
+const csrf = require('../src/middlewares/ho-csrf.js');
+
 
 module.exports = (app) => {
     // Déclarer notre première route
     app.get('/', Home.getHome)
 
-    app.get('/inscription', Register.getRegister)
-    app.post('/inscription', Register.postRegister)
+    app.get('/inscription', csrf.token, Register.getRegister)
+    app.post('/inscription', csrf.verify, Register.postRegister)
 
-    app.get('/connexion', Auth.getAuth)
-    app.post('/connexion', Auth.postAuth)
+    app.get('/connexion', csrf.token, Auth.getAuth)
+    app.post('/connexion', csrf.verify, Auth.postAuth)
+
     app.get('/deconnexion', Auth.getDeconnect)
     
 
@@ -21,6 +24,8 @@ module.exports = (app) => {
 
     app.get('/admin/user/delete/:id', AdminUser.getDelete)
 
-    app.get('/admin/user/edit/:id', AdminUser.getEdit)
-    app.post('/admin/user/edit/:id', AdminUser.postEdit)
+    app.get('/admin/user/edit/:id', csrf.token, AdminUser.getEdit)
+    app.post('/admin/user/edit/:id', csrf.verify, AdminUser.postEdit)
+
+    app.get('/admin/messages', Home.getMessage)
 };
