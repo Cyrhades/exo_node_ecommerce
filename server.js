@@ -6,7 +6,8 @@ dotenv.config();
 const router = require("./app/routes.js");
 const session = require('express-session');
 const flash = require('express-flash-messages');
-
+const jwt = require('jsonwebtoken');
+const Cookies = require('cookies');
 
 //--------------------------------------------------------------------
 //      Ajout du midlleware express session
@@ -25,7 +26,7 @@ app.use(flash())
 //--------------------------------------------------------------------
 //    Session pour développement
 //--------------------------------------------------------------------
-
+/*
 if(process.env.APP_ENV === 'dev') {
     app.use((request, response, next) => {
         request.session.user = {
@@ -37,6 +38,7 @@ if(process.env.APP_ENV === 'dev') {
         next();
     })
 }
+*/
 
 //--------------------------------------------------------------------
 //    Ajout du midlleware pour transmettre la session à la vue
@@ -65,16 +67,27 @@ app.use(express.static(path.join(__dirname, "public")));
 //  Middleware permettant de gérer les droits admin
 //--------------------------------------------------------------------
 app.use('/admin',(request, response, next) => {
-    if(request.session && request.session.user) {
-        if(request.session.user.roles && request.session.user.roles.includes('admin')) {
-            next();
-        } else {
-            response.status(403).render("admin/error/403");
-        }
+    const cookies = new Cookies(request, response);
+    const cookieJWT = cookies.get('jwt');
+    if(cookieJWT) {
+        jwt.verify(cookieJWT, process.env.JWT_SECRET, function(err, decoded) {
+            if (err) {
+                cookies.set('jwt','',{expires:0});
+                response.status(403).render("admin/error/403");
+            } else {
+                if(decoded.roles && decoded.roles.includes('admin')) {
+                    next();
+                } else {
+                    response.status(403).render("admin/error/403");
+                }
+                response.send("accès autorisé");
+            }
+            console.log(decoded.foo) // bar
+        });
     }
     else {
         response.redirect('/connexion')
-    }        
+    }  
 })
 
 router(app)

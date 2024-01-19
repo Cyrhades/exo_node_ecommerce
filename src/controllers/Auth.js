@@ -1,5 +1,8 @@
 const User = require('../repositories/User.js');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const Cookies = require('cookies');
+
 
 exports.getAuth = (request, response) => {
     if(request.session.user) {
@@ -12,6 +15,8 @@ exports.getAuth = (request, response) => {
 
 exports.getDeconnect = (request, response) => {
     request.session.user = null;
+    const cookies = new Cookies(request, response);
+    cookies.set('jwt','',{expires:0});
     request.flash('notify', 'Vous êtes maintenant déconnecté !')
     response.redirect('/')
 }
@@ -42,6 +47,10 @@ exports.postAuth = async (request, response) => {
             email: currentUser.email,
             roles: currentUser.roles
         };
+        const token = jwt.sign({ email: currentUser.email, roles: currentUser.roles}, process.env.JWT_SECRET);
+        let cookies = new Cookies(request, response)
+        cookies.set('jwt', token, { httpOnly: true })
+
         request.flash('notify', 'Vous êtes maintenant connecté !')
         response.redirect('/');
     } else {

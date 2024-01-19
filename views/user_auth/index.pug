@@ -7,7 +7,8 @@ block content
                 h1 Connexion
                 if error
                     .alert.alert-danger #{error}
-                form(action="/connexion" method="post")        
+                form(action="/connexion" method="post")
+                    input(type="hidden" name="csrf" value=csrf)        
                     .form-group
                         label(for='email') Email :
                         input.form-control(type='email', name="email", id='email', value=user.email ,placeholder='Votre email')
