@@ -1,0 +1,53 @@
+extends ../layout.pug
+
+block content 
+    .container.mt-5
+
+        .row.justify-content-center
+            .col-md-8
+                h1 Profil utilisateur
+                if error
+                    .alert.alert-danger #{error}
+                form(action="/profil" method="post")
+                    input(type="hidden" name="csrf" value=csrf)
+                    .form-group
+                        label(for='email') Email :
+                        input.form-control(type='email', name="email", id='email', readonly="true" value=user.email ,placeholder='Votre email')
+
+                    .form-group
+                        label(for='nom') Nom :
+                        input.form-control(type='text', name="lastname" id='nom', value=user.lastname ,placeholder='Votre nom')
+
+                    .form-group
+                        label(for='prenom') Prénom :
+                        input.form-control(type='text', name="firstname", id='prenom', value=user.firstname ,placeholder='Votre prénom')
+
+                    hr
+                    .form-check.form-switch
+                        label.form-check-label(for='a2f') Activer la double authentification
+                        input.form-check-input(type='checkbox', name="a2f", id='a2f' checked=(qr == undefined ? true : false))
+                
+                    //- On obtient le QR code que si le a2f n'est pas déjà actif
+                    if qr
+                        #zone_a2f.hide
+                            img(src=qr)
+                            br
+                            div ou saisir Manuellement les informations suivantes 
+                            br
+                            b Nom du compte : 
+                            span #{account}
+                            br
+                            b Votre clé  : 
+                            span #{key}
+                            br
+                            b Type de clé : Basé sur l'heure (OTP - One Time Password) 
+                            hr
+                            .row.g-3.align-items-center
+                                .col-auto
+                                    label(for='number_2fa') Code a2f
+                                .col-auto
+                                    input.form-control(type="text", name="number_2fa", id="number_2fa",maxlength="6")
+                                .col-auto                        
+                                    small Validez avec le code A2F pour activer la double authentification
+
+                    button.btn.btn-primary.mt-20(type='submit') Sauvegarder

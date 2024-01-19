@@ -26,7 +26,7 @@ app.use(flash())
 //--------------------------------------------------------------------
 //    Session pour développement
 //--------------------------------------------------------------------
-/*
+
 if(process.env.APP_ENV === 'dev') {
     app.use((request, response, next) => {
         request.session.user = {
@@ -38,8 +38,6 @@ if(process.env.APP_ENV === 'dev') {
         next();
     })
 }
-*/
-
 //--------------------------------------------------------------------
 //    Ajout du midlleware pour transmettre la session à la vue
 //--------------------------------------------------------------------

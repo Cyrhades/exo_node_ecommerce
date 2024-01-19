@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Cookies = require('cookies');
 
-
 exports.getAuth = (request, response) => {
     if(request.session.user) {
         request.flash('info', 'Vous êtes déjà connecté !')
@@ -20,7 +19,6 @@ exports.getDeconnect = (request, response) => {
     request.flash('notify', 'Vous êtes maintenant déconnecté !')
     response.redirect('/')
 }
-
 
 exports.postAuth = async (request, response) => {
     if(request.session.user) {

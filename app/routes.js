@@ -1,6 +1,7 @@
 const Home = require('../src/controllers/Home.js');
 const Register = require('../src/controllers/Register.js');
 const Auth = require('../src/controllers/Auth.js');
+const Profil = require('../src/controllers/Profil.js');
 const Dashboard = require('../src/controllers/Dashboard.js');
 const AdminUser = require('../src/controllers/AdminUser.js');
 const csrf = require('../src/middlewares/ho-csrf.js');
@@ -15,6 +16,9 @@ module.exports = (app) => {
 
     app.get('/connexion', csrf.token, Auth.getAuth)
     app.post('/connexion', csrf.verify, Auth.postAuth)
+
+    app.get('/profil', csrf.token, Profil.getProfil)
+    app.post('/profil', csrf.token, Profil.postProfil)
 
     app.get('/deconnexion', Auth.getDeconnect)
     

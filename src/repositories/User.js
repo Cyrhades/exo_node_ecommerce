@@ -7,6 +7,8 @@ const userSchema = new mongoose.Schema({
     email:  { type: String, unique : [true, "Cet email existe déjà en BDD"], required: true },
     password:  { type: String, required: true },
     roles: { type: Array, required: true },
+    secret_a2f: {type: String},
+    enable_a2f: {type: Boolean},
     date: { type: Date, default: Date.now }
 });
 

@@ -23,7 +23,6 @@ exports.getDelete =  (request, response) => {
     }
 }
 
-
 exports.getEdit = (request, response) => {
     if(request.params.id) {
         User.findById(request.params.id).then((user) => {
