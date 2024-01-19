@@ -30,7 +30,7 @@ html(lang="en")
                 ul.nav.nav-underline
                     li.nav-item
                         a.nav-link(aria-current="page" href="/" class=(app.route=="/"?"active":"")) Accueil
-                    if app.user
+                    if app.user && app.user.connected
                         li.nav-item
                             a.nav-link(href="/profil") Profil
                         li.nav-item

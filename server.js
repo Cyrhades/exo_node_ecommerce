@@ -26,7 +26,7 @@ app.use(flash())
 //--------------------------------------------------------------------
 //    Session pour développement
 //--------------------------------------------------------------------
-
+/*
 if(process.env.APP_ENV === 'dev') {
     app.use((request, response, next) => {
         request.session.user = {
@@ -38,6 +38,8 @@ if(process.env.APP_ENV === 'dev') {
         next();
     })
 }
+*/
+
 //--------------------------------------------------------------------
 //    Ajout du midlleware pour transmettre la session à la vue
 //--------------------------------------------------------------------
@@ -60,6 +62,17 @@ app.set('view engine', 'pug');
 // On déclare dans notre application quel sera notre répertoire static
 app.use(express.static(path.join(__dirname, "public")));
 
+//--------------------------------------------------------------------
+//  Middleware permettant d'assurer la double authentification
+//--------------------------------------------------------------------
+app.use('/', (request, response, next) => {
+    // si on a une session mais pas connected (il y a donc besoin d'une double authentification)
+    if(request.session.user && request.session.user.connected == false && request._parsedUrl.pathname !== '/connexion/a2f') {
+        response.redirect('/connexion/a2f');
+    } else {
+        next();
+    }
+});
 
 //--------------------------------------------------------------------
 //  Middleware permettant de gérer les droits admin

@@ -17,8 +17,12 @@ module.exports = (app) => {
     app.get('/connexion', csrf.token, Auth.getAuth)
     app.post('/connexion', csrf.verify, Auth.postAuth)
 
+    app.get('/connexion/a2f', csrf.token, Auth.getAuthA2F)
+    app.post('/connexion/a2f', csrf.verify, Auth.postAuthA2F)
+    
+
     app.get('/profil', csrf.token, Profil.getProfil)
-    app.post('/profil', csrf.token, Profil.postProfil)
+    app.post('/profil', csrf.verify, Profil.postProfil)
 
     app.get('/deconnexion', Auth.getDeconnect)
     

@@ -1,0 +1,20 @@
+extends ../layout.pug
+
+block content 
+    .container.mt-5
+        .row.justify-content-center
+            .col-md-8
+                h1 Double authentification
+                if error
+                    .alert.alert-danger #{error}
+                form(action="/connexion/a2f" method="post")   
+                    input(type="hidden" name="csrf" value=csrf)
+                    .row.g-3.align-items-center
+                        .col-auto
+                            label(for='number_2fa') Code A2F
+                        .col-auto
+                            input.form-control(type="text", name="number_2fa", id="number_2fa", maxlength="6")
+                        .col-auto                        
+                            small Validez avec le code A2F affiché sur votre application de double authentification
+
+                    button.btn.btn-primary.mt-20(type='submit') Se connecter
